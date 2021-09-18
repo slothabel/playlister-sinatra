@@ -37,18 +37,17 @@ end
 
 patch '/songs/:slug' do
     @song = Song.find_by_slug(params[:slug])
-    @song.artist.update(params[:artist])
-    @song.genre_ids = params[:genres]
+    # @song.artist.update(params[:artist])
     # binding.pry
+    @song.artist = Artist.find_or_create_by(name: params[:artist][:name])
+
+    @song.genre_ids = params[:genres]
+    @song.save
 
 #     let(:artist_name) { "Person with a Face" }
 #   let(:genre_1_name) { "Hippity Hop" }
 #   let(:genre_2_name) { "New Age Garbage" }
 #   let(:song_name) { "That One with the Guitar" }
-
-    @song.save
-
-    binding.pry
 
     flash[:message] = "Successfully updated song."
     redirect to("/songs/#{@song.slug}")

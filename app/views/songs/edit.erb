@@ -10,17 +10,16 @@
 
  <h3> Current artist: <%= @song.artist.name %>  </h3>
 
- <% binding.pry %>
 
  <label>Artist name:</label>
- <input type="text" id="Artist Name" name="artist[name]"><br></br>
+ <input type="text" id="Artist Name" name="artist[name]" value="<%= @song.artist.name %>"><br></br>
 
 
  <label>Edit Genres:</label><br>
  <% Genre.all.each do |genre| %>   
     <br>
      <label><%= genre.name %></label>   
-      <input type="checkbox" name="genres[]" value="<%= genre.id %>" id="<%= genre.name %>" <%='checked' if Genre.all.include?(genre) %>>  
+      <input type="checkbox" name="genres[]" value="<%= genre.id %>" id="<%= genre.name %>" <%='checked' if @song.genres.include?(genre) %>>  
     <% end %>
 
 
