@@ -1,2 +1,12 @@
-<% binding.pry %>
-<h1><%= @song.name %></h1>
+<% if flash.has?(:message) %>
+ <%= flash[:message] %> 
+ <% end %>
+
+<h1>Song: <%= @song.name %></h1>
+
+<h2> Artist: <a href='/artists/<%= @song.artist.slug %>'> <%= @song.artist.name %> </a> </h2>
+<% @song.genres.each do |genre| %> 
+    <h2> <a href='/genres/<%= genre.slug %>'> <%= genre.name %> </a> </h2>
+    <% end %>
+
+<h4> <a href='/songs/<%= @song.slug %>/edit'> Edit this song </a> </h4>
